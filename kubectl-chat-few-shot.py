@@ -20,6 +20,18 @@ prompt="You are my Kubernetes Command line tool (kubectl) generator. Given an in
 response = openai.ChatCompletion.create(
         model=model,
         messages=[
+            { "role": "user",      "content": "provide a kubectl command to list all pods for all namespaces which run more than 3 days."},
+            { "role": "assistant", "content" :"kubectl get pods --all-namespaces -o jsonpath=\'{range .items[*]}{.metadata.namespace}{\"/\"}{.metadata.name}{\": \"}{.metadata.creationTimestamp}{\"\\n\"}{end}\' | awk \'$NF < \"\'$(date -d \'3 days ago\' \'+%Y-%m-%dT%H:%M:%SZ\')\'\" {print $0}\'"},
+
+            { "role": "user",      "content": "provide a kubectl command to list all pods for all namespaces with restartCount more than 10 times."},
+            { "role": "assistant", "content" :"kubectl get pods --all-namespaces -o jsonpath=\'{range .items[*]}{.metadata.namespace}{\"/\"}{.metadata.name}{\": \"}{.status.containerStatuses[0].restartCount}{\"\\n\"}{end}\' | awk \'$NF > 10\'"},
+
+            { "role": "user",      "content": "Is below command valid ? kubectl -n kube-system logs kube-system/podname "},
+            { "role": "assistant", "content": "No, it is not valid. <namespace>/<podname> is not acceptted by kubectl. correct answer is kubectl -n kube-system logs podname"},
+
+            { "role": "user",      "content": "List pods in x namespaces"},
+            { "role": "assistant", "content": "kubectl -n kube-system get pods --no-headers | awk '{print $1}'"},
+
             {"role": "user", "content": prompt + request}    ],
         temperature=0.1,
         max_tokens=2048,
