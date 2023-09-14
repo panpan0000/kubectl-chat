@@ -29,6 +29,9 @@ response = openai.ChatCompletion.create(
             { "role": "user",      "content": "Is below command valid ? kubectl -n kube-system logs kube-system/podname "},
             { "role": "assistant", "content": "No, it is not valid. <namespace>/<podname> is not acceptted by kubectl. correct answer is kubectl -n kube-system logs podname"},
 
+            { "role": "user",      "content": "Is below command valid ? kubectl -n kube-system logs <pod> --grep=<keyword> "},
+            { "role": "assistant", "content": "No, it is not valid. kubectl does not have \"--grep\" flag. you should do it by kubectl -n kube-system logs <pod> |grep <keyword>"},
+
             { "role": "user",      "content": "List pods in x namespaces"},
             { "role": "assistant", "content": "kubectl -n kube-system get pods --no-headers | awk '{print $1}'"},
 
