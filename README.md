@@ -1,7 +1,11 @@
-This is a demo code: to illustrate the methodology of do kubectl operation with LLM assistant.
+This is a demo code: just to illustrate the methodology of do kubectl operation with LLM assistant.
 
 
 Usage:
+
+```
+pip instal openai
+```
 
 ```
 export OPENAI_API_KEY="$your-key"
