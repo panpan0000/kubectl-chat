@@ -1,5 +1,6 @@
-This is a demo code: just to illustrate the methodology of do kubectl operation with LLM assistant.
+This is a sample code: just to illustrate the methodology of do k8s(`kubectl`) operation with LLM assistant.
 
+Thanks to project [Kubectl-GPT](https://github.com/abhishek-ch/Kubectl-GPT/blob/master/kgpt/kubectlprompt.py) for the great prompt as my reference.
 
 Usage:
 
